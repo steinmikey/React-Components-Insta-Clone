@@ -43,18 +43,41 @@ const App = () => {
     );
   };
 
-  const getFilteredPosts = () => {
-    const filteredPosts = posts.filter((post) => {
-      return post.username.toLowerCase().includes(searchTerm.toLowerCase());
-    });
-    return filteredPosts;
+  // const getFilteredPosts = () => {
+  //   const filteredPosts = posts.filter((post) => {
+  //     return (
+  //       post.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //       post.comments.forEach((item) => {
+  //         item.username.toLowerCase().includes(searchTerm.toLowerCase());
+  //       })
+  //     );
+  //   });
+  //   return filteredPosts;
+  // };
+
+  const includesSearchTerm = (value) => {
+    return value.toLowerCase().includes(searchTerm.toLowerCase());
   };
+
+  const postMatchesSearchTerm = (post) => {
+    let fields = [];
+
+    fields.push(post.username);
+    post.comments.forEach((comment) => {
+      fields.push(comment.username);
+      fields.push(comment.text);
+    });
+
+    return fields.find(includesSearchTerm);
+  };
+
+  const getFilteredPosts = () => posts.filter(postMatchesSearchTerm);
 
   return (
     <div className="App">
       {/* Add SearchBar and Posts here to render them */}
       <SearchBar setSearchTerm={setSearchTerm} />
-      <Posts posts={getFilteredPosts()} likePost={likePost} />
+      <Posts posts={getFilteredPosts()} likePost={likePost} setPosts={setPosts} />
 
       {/* Check the implementation of each component, to see what props they require, if any! */}
     </div>

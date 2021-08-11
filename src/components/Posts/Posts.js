@@ -4,13 +4,13 @@ import "./Posts.css";
 
 const Posts = (props) => {
   // 🔥 Make sure the parent of Posts is passing the right props!
-  const { likePost, posts } = props;
+  const { likePost, posts, setPosts } = props;
 
   return (
     <div className="posts-container-wrapper">
       {/* Map through the posts array returning a Post component at each iteration */}
       {posts.map((post) => {
-        return <Post key={post.id} post={post} likePost={likePost} />;
+        return <Post key={post.id} post={post} likePost={likePost} posts={posts} setPosts={setPosts} />;
       })}
       {/* Check the implementation of Post to see what props it requires! */}
     </div>

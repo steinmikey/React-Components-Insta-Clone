@@ -4,7 +4,7 @@
   min-width: 400px;
   margin: 5px auto;
 }
-.post-header{
+.post-header {
   display: flex;
   align-items: center;
 }
@@ -39,6 +39,10 @@
 .like-section {
   display: flex;
   justify-content: flex-start;
+  align-items: flex-end;
+}
+.like-section-comment {
+  margin-left: 10px;
 }
 .like-section-wrapper {
   height: 10px;
